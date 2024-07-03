@@ -1,5 +1,5 @@
 async function sendNickname(nickname: string) {
-    const url = `http://localhost:6969?nickname=${encodeURIComponent(nickname)}`;
+    const url = `http://localhost:6969/add_whitelist?nickname=${encodeURIComponent(nickname)}`;
 
     try {
         const response = await fetch(url);
