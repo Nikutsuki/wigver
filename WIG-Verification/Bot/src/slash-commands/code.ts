@@ -1,6 +1,8 @@
 import {Client, CommandInteraction, SlashCommandBuilder} from "discord.js";
 import {SlashCommand} from "../bot";
 import Student from "../models/Student";
+import Config from "../config";
+import fs from "fs";
 
 const Command = {
     data: new SlashCommandBuilder()
@@ -44,6 +46,14 @@ const Command = {
         await interaction.reply({
             content: `Zweryfikowałeś swoje konto. Możesz teraz dołączyć na serwer WIG.`,
             ephemeral: true
+        });
+
+        let whitelist_file = fs.readFileSync(Config.WHITELIST_PATH, 'utf8');
+        whitelist_file += `\n${student.minecraft_username}`;
+        fs.writeFileSync(Config.WHITELIST_PATH, whitelist_file);
+
+        interaction.guild?.members.fetch(interaction.user.id).then(member => {
+            member.roles.add(Config.VERIFIED_ROLE_ID).catch(console.error);
         });
     }
 } as SlashCommand;

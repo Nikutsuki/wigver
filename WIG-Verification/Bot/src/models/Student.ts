@@ -28,6 +28,18 @@ const StudentSchema: Schema = new Schema({
         unique: true,
     },
 
+    name: {
+        type: String,
+        required: true,
+
+    },
+
+    surname: {
+        type: String,
+        required: true,
+
+    },
+
     verified: {
         type: Boolean,
         required: true,

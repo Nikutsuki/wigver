@@ -12,9 +12,13 @@ export default abstract class Config {
 
     public static readonly DISCORD_CLIENT_ID: string = process.env.DISCORD_CLIENT_ID!;
 
+    public static readonly VERIFIED_ROLE_ID: string = process.env.VERIFIED_ROLE_ID!;
+
     public static readonly MAIL_HOST: string = process.env.MAIL_HOST!;
 
     public static readonly MAIL_PORT: number = Number(process.env.MAIL_PORT!);
 
     public static readonly MAIL_USER: string = process.env.MAIL_USER!;
+
+    public static readonly WHITELIST_PATH: string = process.env.WHITELIST_PATH!;
 }
