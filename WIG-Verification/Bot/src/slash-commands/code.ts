@@ -3,6 +3,7 @@ import {SlashCommand} from "../bot";
 import Student from "../models/Student";
 import Config from "../config";
 import fs from "fs";
+import sendNickname from "../utils/plugin";
 
 const Command = {
     data: new SlashCommandBuilder()
@@ -48,10 +49,8 @@ const Command = {
             ephemeral: true
         });
 
-        let whitelist_file = fs.readFileSync(Config.WHITELIST_PATH, 'utf8');
-        whitelist_file += `\n${student.minecraft_username}`;
-        fs.writeFileSync(Config.WHITELIST_PATH, whitelist_file);
-
+        sendNickname(student.minecraft_username);
+        
         interaction.guild?.members.fetch(interaction.user.id).then(member => {
             member.roles.add(Config.VERIFIED_ROLE_ID).catch(console.error);
         });
