@@ -22,12 +22,15 @@ const client = new Client({
 });
 
 let commands : any = [];
+let clientCommands : Collection<string, SlashCommand> = new Collection();
+client.slashCommands = clientCommands;
 
 const prepareSlashCommands = async () => {
     for (const file of readdirSync(path.join(__dirname, `./slash-commands`))) {
         if(file.endsWith(".d.ts")) continue;
         const command = await import(path.join(__dirname, `./slash-commands/${file}`));
         commands.push(command.default.data.toJSON());
+        client.slashCommands.set(command.default.data.name, command.default);
     }
 }
 
