@@ -9,6 +9,12 @@ const Command = {
         .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
     execute: async (client: Client, interaction: CommandInteraction) => {
         sendNickname(interaction.options.get('nickname')?.value as string);
+        console.log(interaction.options.get('nickname')?.value as string);
+
+        await interaction.reply({
+            content: `User has been added to the whitelist.`,
+            ephemeral: true
+        });
     }
 }
 
